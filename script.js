@@ -122,32 +122,75 @@ function renderTimetable(day) {
     const data = timetableData[day];
     
     // 音楽室のタイムテーブル
-    const musicRoomContainer = document.getElementById(`music-room-${day}`);
-    musicRoomContainer.innerHTML = '';
-    
-    data.musicRoom.forEach((performance, index) => {
-        const div = document.createElement('div');
-        div.className = 'performance';
-        div.innerHTML = `
-            <span class="performance-time">${performance.time}</span>
-            <span class="performance-band">${performance.band}</span>
-        `;
-        musicRoomContainer.appendChild(div);
-    });
+    renderVenueTimeline(`music-room-${day}`, data.musicRoom);
     
     // 体育館のタイムテーブル
-    const gymnasiumContainer = document.getElementById(`gymnasium-${day}`);
-    gymnasiumContainer.innerHTML = '';
+    renderVenueTimeline(`gymnasium-${day}`, data.gymnasium);
+}
+
+// 会場のタイムラインを描画
+function renderVenueTimeline(containerId, performances) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
     
-    data.gymnasium.forEach((performance, index) => {
-        const div = document.createElement('div');
-        div.className = 'performance';
-        div.innerHTML = `
-            <span class="performance-time">${performance.time}</span>
-            <span class="performance-band">${performance.band}</span>
+    // タイムラインコンテナを作成
+    const timelineContainer = document.createElement('div');
+    timelineContainer.className = 'timeline-container';
+    
+    // タイムラインを作成
+    const timelineLine = document.createElement('div');
+    timelineLine.className = 'timeline-line';
+    timelineContainer.appendChild(timelineLine);
+    
+    // 各パフォーマンスをタイムライン上に配置
+    performances.forEach((performance, index) => {
+        const topPosition = calculateTimelinePosition(performance.time, performances);
+        
+        // タイムマーカーを作成
+        const marker = document.createElement('div');
+        marker.className = 'timeline-marker';
+        marker.style.top = `${topPosition}px`;
+        timelineContainer.appendChild(marker);
+        
+        // 時刻ラベルを作成
+        const timeLabel = document.createElement('div');
+        timeLabel.className = 'time-label';
+        timeLabel.style.top = `${topPosition - 10}px`;
+        timeLabel.textContent = performance.time;
+        timelineContainer.appendChild(timeLabel);
+        
+        // パフォーマンス情報を作成
+        const performanceDiv = document.createElement('div');
+        performanceDiv.className = 'performance';
+        performanceDiv.style.top = `${topPosition - 15}px`;
+        performanceDiv.innerHTML = `
+            <div class="performance-time">${performance.time}</div>
+            <div class="performance-band">${performance.band}</div>
         `;
-        gymnasiumContainer.appendChild(div);
+        timelineContainer.appendChild(performanceDiv);
     });
+    
+    container.appendChild(timelineContainer);
+}
+
+// タイムライン上の位置を計算
+function calculateTimelinePosition(timeStr, performances) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    
+    // 最初と最後の時刻を取得
+    const firstTime = performances[0].time.split(':').map(Number);
+    const lastTime = performances[performances.length - 1].time.split(':').map(Number);
+    const firstTotalMinutes = firstTime[0] * 60 + firstTime[1];
+    const lastTotalMinutes = lastTime[0] * 60 + lastTime[1];
+    
+    // タイムラインの高さ（400px - 40px padding）
+    const timelineHeight = 360;
+    
+    // 位置を計算（最初の時刻を0、最後の時刻を最大高さとする）
+    const position = ((totalMinutes - firstTotalMinutes) / (lastTotalMinutes - firstTotalMinutes)) * timelineHeight;
+    
+    return Math.max(20, Math.min(timelineHeight - 20, position + 20));
 }
 
 // 現在演奏中のバンドを更新
@@ -185,11 +228,57 @@ function updateCurrentBands() {
             document.getElementById('current-gymnasium').textContent = '休憩中';
             document.getElementById('current-gymnasium-time').textContent = '';
         }
+        
+        // タイムラインの現在のバンドをハイライト
+        highlightCurrentPerformances(currentDay, data);
     } else {
         document.getElementById('current-music-room').textContent = '開催日外';
         document.getElementById('current-music-room-time').textContent = '';
         document.getElementById('current-gymnasium').textContent = '開催日外';
         document.getElementById('current-gymnasium-time').textContent = '';
+    }
+}
+
+// 現在演奏中のパフォーマンスをハイライト
+function highlightCurrentPerformances(day, data) {
+    // 音楽室の現在のバンド
+    const musicRoomCurrent = getCurrentBand(data.musicRoom);
+    const musicRoomMarkers = document.querySelectorAll(`#music-room-${day} .timeline-marker`);
+    const musicRoomPerformances = document.querySelectorAll(`#music-room-${day} .performance`);
+    
+    musicRoomMarkers.forEach((marker, index) => {
+        marker.classList.remove('current');
+        if (musicRoomPerformances[index]) {
+            musicRoomPerformances[index].classList.remove('current');
+        }
+    });
+    
+    if (musicRoomCurrent) {
+        const currentIndex = data.musicRoom.findIndex(p => p.time === musicRoomCurrent.time);
+        if (currentIndex >= 0 && musicRoomMarkers[currentIndex]) {
+            musicRoomMarkers[currentIndex].classList.add('current');
+            musicRoomPerformances[currentIndex].classList.add('current');
+        }
+    }
+    
+    // 体育館の現在のバンド
+    const gymnasiumCurrent = getCurrentBand(data.gymnasium);
+    const gymnasiumMarkers = document.querySelectorAll(`#gymnasium-${day} .timeline-marker`);
+    const gymnasiumPerformances = document.querySelectorAll(`#gymnasium-${day} .performance`);
+    
+    gymnasiumMarkers.forEach((marker, index) => {
+        marker.classList.remove('current');
+        if (gymnasiumPerformances[index]) {
+            gymnasiumPerformances[index].classList.remove('current');
+        }
+    });
+    
+    if (gymnasiumCurrent) {
+        const currentIndex = data.gymnasium.findIndex(p => p.time === gymnasiumCurrent.time);
+        if (currentIndex >= 0 && gymnasiumMarkers[currentIndex]) {
+            gymnasiumMarkers[currentIndex].classList.add('current');
+            gymnasiumPerformances[currentIndex].classList.add('current');
+        }
     }
 }
 
