@@ -1,7 +1,8 @@
-// タイムテーブルデータ
+// タイムテーブルデータ（空き時間も含む完全版）
 const timetableData = {
     day1: {
         musicRoom: [
+            { time: "10:00", band: "", isEmpty: true },
             { time: "10:14", band: "エーデルワイス" },
             { time: "10:28", band: "peony" },
             { time: "10:42", band: "社会不適ROSA" },
@@ -14,16 +15,22 @@ const timetableData = {
             { time: "11:58", band: "Toxic Tune" },
             { time: "12:07", band: "インクブルー" },
             { time: "12:16", band: "TheSETS" },
+            { time: "12:30", band: "", isEmpty: true },
+            { time: "13:00", band: "", isEmpty: true },
+            { time: "13:30", band: "", isEmpty: true },
             { time: "13:53", band: "Emz." },
             { time: "14:09", band: "first.PENGUINS" },
-            { time: "14:20", band: "（空き時間）" },
+            { time: "14:20", band: "", isEmpty: true },
             { time: "14:29", band: "CELESTLIVE" },
             { time: "14:45", band: "juicy" },
             { time: "14:54", band: "UNIVE" },
             { time: "15:04", band: "Vibes" },
-            { time: "15:20", band: "Alstroemeria" }
+            { time: "15:20", band: "Alstroemeria" },
+            { time: "15:40", band: "", isEmpty: true },
+            { time: "16:00", band: "", isEmpty: true }
         ],
         gymnasium: [
+            { time: "10:00", band: "", isEmpty: true },
             { time: "10:30", band: "umbrain" },
             { time: "10:55", band: "世にも奇妙なバンド" },
             { time: "11:15", band: "juicy" },
@@ -33,11 +40,17 @@ const timetableData = {
             { time: "12:42", band: "あぷりこっと" },
             { time: "12:55", band: "消費期限" },
             { time: "13:11", band: "reversible" },
-            { time: "13:27", band: "（空き時間）" }
+            { time: "13:27", band: "", isEmpty: true },
+            { time: "13:50", band: "", isEmpty: true },
+            { time: "14:20", band: "", isEmpty: true },
+            { time: "15:00", band: "", isEmpty: true },
+            { time: "15:30", band: "", isEmpty: true },
+            { time: "16:00", band: "", isEmpty: true }
         ]
     },
     day2: {
         musicRoom: [
+            { time: "09:00", band: "", isEmpty: true },
             { time: "09:19", band: "Chilvania" },
             { time: "09:28", band: "MISS:TEEN" },
             { time: "09:44", band: "るなべる。" },
@@ -56,13 +69,21 @@ const timetableData = {
             { time: "12:37", band: "デリカシー咀嚼" },
             { time: "12:47", band: "berry jam" },
             { time: "12:58", band: "Luminous" },
+            { time: "13:20", band: "", isEmpty: true },
+            { time: "13:50", band: "", isEmpty: true },
             { time: "14:10", band: "SOAR" },
             { time: "14:22", band: "ALCHU" },
             { time: "14:37", band: "Emperor" },
             { time: "14:47", band: "あくびまじり。" },
-            { time: "14:58", band: "LuNA" }
+            { time: "14:58", band: "LuNA" },
+            { time: "15:20", band: "", isEmpty: true },
+            { time: "15:40", band: "", isEmpty: true },
+            { time: "16:00", band: "", isEmpty: true }
         ],
         gymnasium: [
+            { time: "10:00", band: "", isEmpty: true },
+            { time: "11:00", band: "", isEmpty: true },
+            { time: "12:00", band: "", isEmpty: true },
             { time: "12:45", band: "BRASS ROCK" },
             { time: "13:11", band: "with" },
             { time: "13:27", band: "TheSETS" },
@@ -73,7 +94,9 @@ const timetableData = {
             { time: "16:00", band: "reversible" },
             { time: "16:09", band: "with" },
             { time: "16:18", band: "GREENERYTHEATER" },
-            { time: "16:27", band: "CELESTE LIVE" }
+            { time: "16:27", band: "CELESTE LIVE" },
+            { time: "16:45", band: "", isEmpty: true },
+            { time: "17:00", band: "", isEmpty: true }
         ]
     }
 };
@@ -98,7 +121,7 @@ function getCurrentBand(performances) {
     
     for (let i = 0; i < performances.length; i++) {
         const performance = performances[i];
-        if (performance.band === "（空き時間）") continue;
+        if (performance.isEmpty || !performance.band) continue;
         
         const startTime = timeToMinutes(performance.time);
         const endTime = i < performances.length - 1 ? 
@@ -159,15 +182,17 @@ function renderVenueTimeline(containerId, performances) {
         timeLabel.textContent = performance.time;
         timelineContainer.appendChild(timeLabel);
         
-        // パフォーマンス情報を作成
-        const performanceDiv = document.createElement('div');
-        performanceDiv.className = 'performance';
-        performanceDiv.style.top = `${topPosition - 15}px`;
-        performanceDiv.innerHTML = `
-            <div class="performance-time">${performance.time}</div>
-            <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
-        `;
-        timelineContainer.appendChild(performanceDiv);
+        // パフォーマンス情報を作成（空き時間の場合は表示しない）
+        if (!performance.isEmpty) {
+            const performanceDiv = document.createElement('div');
+            performanceDiv.className = 'performance';
+            performanceDiv.style.top = `${topPosition - 15}px`;
+            performanceDiv.innerHTML = `
+                <div class="performance-time">${performance.time}</div>
+                <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
+            `;
+            timelineContainer.appendChild(performanceDiv);
+        }
     });
     
     container.appendChild(timelineContainer);
@@ -184,8 +209,8 @@ function calculateTimelinePosition(timeStr, performances) {
     const firstTotalMinutes = firstTime[0] * 60 + firstTime[1];
     const lastTotalMinutes = lastTime[0] * 60 + lastTime[1];
     
-    // タイムラインの高さ（400px - 40px padding）
-    const timelineHeight = 360;
+    // タイムラインの高さ（800px - 40px padding）
+    const timelineHeight = 760;
     
     // 位置を計算（最初の時刻を0、最後の時刻を最大高さとする）
     const position = ((totalMinutes - firstTotalMinutes) / (lastTotalMinutes - firstTotalMinutes)) * timelineHeight;
