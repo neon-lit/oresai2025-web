@@ -177,26 +177,26 @@ body {
 .timeline-container {
     position: relative;
     padding: 20px 0;
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .timeline-line {
     position: absolute;
-    left: 80px;
+    left: 60px;
     top: 0;
     bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, #e2e8f0, #cbd5e0);
-    border-radius: 2px;
+    width: 2px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+    border-radius: 1px;
 }
 
 .timeline-marker {
     position: absolute;
-    left: 70px;
-    width: 20px;
-    height: 20px;
+    left: 50px;
+    width: 16px;
+    height: 16px;
     background: white;
-    border: 3px solid #e2e8f0;
+    border: 2px solid #667eea;
     border-radius: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -205,7 +205,8 @@ body {
 .timeline-marker.current {
     background: #f6ad55;
     border-color: #ed8936;
-    box-shadow: 0 0 10px rgba(246, 173, 85, 0.5);
+    box-shadow: 0 0 8px rgba(246, 173, 85, 0.6);
+    transform: translateX(-50%) scale(1.2);
 }
 
 .timeline-marker::after {
@@ -213,9 +214,9 @@ body {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 8px;
-    height: 8px;
-    background: #e2e8f0;
+    width: 6px;
+    height: 6px;
+    background: #667eea;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
@@ -226,20 +227,21 @@ body {
 
 .performance {
     position: absolute;
-    left: 100px;
+    left: 80px;
     right: 0;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border-radius: 8px;
     background: #f8fafc;
-    border-left: 4px solid #e2e8f0;
+    border-left: 3px solid #e2e8f0;
     transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .performance:hover {
     background: #edf2f7;
-    transform: translateX(5px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .performance.current {
@@ -251,25 +253,30 @@ body {
 .performance-time {
     font-weight: bold;
     color: #4a5568;
-    font-size: 0.9rem;
-    margin-bottom: 2px;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
 }
 
 .performance-band {
     color: #2d3748;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.performance-band:hover {
+    color: #667eea;
 }
 
 .time-label {
     position: absolute;
     left: 0;
-    width: 70px;
+    width: 50px;
     text-align: right;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: #718096;
     font-weight: 500;
-    padding-right: 10px;
+    padding-right: 8px;
 }
 
 .no-performance {
@@ -289,17 +296,225 @@ body {
 @media (max-width: 768px) {
     .venues {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .current-bands {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .header p {
+        font-size: 1rem;
     }
     
     .container {
+        padding: 10px;
+    }
+    
+    .current-performance {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .current-performance h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .venue-current {
         padding: 15px;
+    }
+    
+    .venue-current h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .current-band {
+        font-size: 1.2rem;
+    }
+    
+    .current-time {
+        font-size: 0.8rem;
+    }
+    
+    .timetable-section {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .timetable-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .day-selector {
+        margin-bottom: 20px;
+    }
+    
+    .day-button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        font-size: 0.9rem;
+    }
+    
+    .venue {
+        padding: 15px;
+    }
+    
+    .venue h3 {
+        font-size: 1.1rem;
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .timeline-container {
+        min-height: 400px;
+        padding: 15px 0;
+    }
+    
+    .timeline-line {
+        left: 40px;
+        width: 2px;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+        width: 14px;
+        height: 14px;
+    }
+    
+    .timeline-marker::after {
+        width: 5px;
+        height: 5px;
+    }
+    
+    .performance {
+        left: 50px;
+        padding: 8px 12px;
+    }
+    
+    .performance-time {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+    
+    .performance-band {
+        font-size: 0.85rem;
+    }
+    
+    .time-label {
+        width: 30px;
+        font-size: 0.7rem;
+        padding-right: 5px;
+    }
+    
+    .footer {
+        margin-top: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .footer a {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header p {
+        font-size: 0.9rem;
+    }
+    
+    .container {
+        padding: 8px;
+    }
+    
+    .current-performance {
+        padding: 15px 10px;
+    }
+    
+    .current-performance h2 {
+        font-size: 1.3rem;
+    }
+    
+    .venue-current {
+        padding: 12px;
+    }
+    
+    .current-band {
+        font-size: 1.1rem;
+    }
+    
+    .timetable-section {
+        padding: 15px 10px;
+    }
+    
+    .timetable-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .day-button {
+        padding: 8px 16px;
+        margin: 0 3px;
+        font-size: 0.8rem;
+    }
+    
+    .venue {
+        padding: 12px;
+    }
+    
+    .venue h3 {
+        font-size: 1rem;
+        padding: 10px;
+    }
+    
+    .timeline-container {
+        min-height: 350px;
+        padding: 10px 0;
+    }
+    
+    .timeline-line {
+        left: 35px;
+    }
+    
+    .timeline-marker {
+        left: 25px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .performance {
+        left: 45px;
+        padding: 6px 10px;
+    }
+    
+    .performance-time {
+        font-size: 0.7rem;
+    }
+    
+    .performance-band {
+        font-size: 0.8rem;
+    }
+    
+    .time-label {
+        width: 25px;
+        font-size: 0.65rem;
+        padding-right: 3px;
+    }
+    
+    .footer {
+        font-size: 0.8rem;
+    }
+    
+    .footer a {
+        font-size: 0.75rem;
     }
 }

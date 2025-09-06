@@ -165,7 +165,7 @@ function renderVenueTimeline(containerId, performances) {
         performanceDiv.style.top = `${topPosition - 15}px`;
         performanceDiv.innerHTML = `
             <div class="performance-time">${performance.time}</div>
-            <div class="performance-band">${performance.band}</div>
+            <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
         `;
         timelineContainer.appendChild(performanceDiv);
     });
