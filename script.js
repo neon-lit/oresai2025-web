@@ -1,4 +1,4 @@
-// タイムテーブルデータ（空き時間も含む完全版）
+// タイムテーブルデータ（30分刻みの時間軸）
 const timetableData = {
     day1: {
         musicRoom: [
@@ -15,19 +15,13 @@ const timetableData = {
             { time: "11:58", band: "Toxic Tune" },
             { time: "12:07", band: "インクブルー" },
             { time: "12:16", band: "TheSETS" },
-            { time: "12:30", band: "", isEmpty: true },
-            { time: "13:00", band: "", isEmpty: true },
-            { time: "13:30", band: "", isEmpty: true },
             { time: "13:53", band: "Emz." },
             { time: "14:09", band: "first.PENGUINS" },
-            { time: "14:20", band: "", isEmpty: true },
             { time: "14:29", band: "CELESTLIVE" },
             { time: "14:45", band: "juicy" },
             { time: "14:54", band: "UNIVE" },
             { time: "15:04", band: "Vibes" },
-            { time: "15:20", band: "Alstroemeria" },
-            { time: "15:40", band: "", isEmpty: true },
-            { time: "16:00", band: "", isEmpty: true }
+            { time: "15:20", band: "Alstroemeria" }
         ],
         gymnasium: [
             { time: "10:00", band: "", isEmpty: true },
@@ -39,13 +33,7 @@ const timetableData = {
             { time: "12:29", band: "るなべる。" },
             { time: "12:42", band: "あぷりこっと" },
             { time: "12:55", band: "消費期限" },
-            { time: "13:11", band: "reversible" },
-            { time: "13:27", band: "", isEmpty: true },
-            { time: "13:50", band: "", isEmpty: true },
-            { time: "14:20", band: "", isEmpty: true },
-            { time: "15:00", band: "", isEmpty: true },
-            { time: "15:30", band: "", isEmpty: true },
-            { time: "16:00", band: "", isEmpty: true }
+            { time: "13:11", band: "reversible" }
         ]
     },
     day2: {
@@ -69,16 +57,11 @@ const timetableData = {
             { time: "12:37", band: "デリカシー咀嚼" },
             { time: "12:47", band: "berry jam" },
             { time: "12:58", band: "Luminous" },
-            { time: "13:20", band: "", isEmpty: true },
-            { time: "13:50", band: "", isEmpty: true },
             { time: "14:10", band: "SOAR" },
             { time: "14:22", band: "ALCHU" },
             { time: "14:37", band: "Emperor" },
             { time: "14:47", band: "あくびまじり。" },
-            { time: "14:58", band: "LuNA" },
-            { time: "15:20", band: "", isEmpty: true },
-            { time: "15:40", band: "", isEmpty: true },
-            { time: "16:00", band: "", isEmpty: true }
+            { time: "14:58", band: "LuNA" }
         ],
         gymnasium: [
             { time: "10:00", band: "", isEmpty: true },
@@ -94,9 +77,7 @@ const timetableData = {
             { time: "16:00", band: "reversible" },
             { time: "16:09", band: "with" },
             { time: "16:18", band: "GREENERYTHEATER" },
-            { time: "16:27", band: "CELESTE LIVE" },
-            { time: "16:45", band: "", isEmpty: true },
-            { time: "17:00", band: "", isEmpty: true }
+            { time: "16:27", band: "CELESTE LIVE" }
         ]
     }
 };
@@ -165,37 +146,58 @@ function renderVenueTimeline(containerId, performances) {
     timelineLine.className = 'timeline-line';
     timelineContainer.appendChild(timelineLine);
     
-    // 各パフォーマンスをタイムライン上に配置
-    performances.forEach((performance, index) => {
-        const topPosition = calculateTimelinePosition(performance.time, performances);
-        
-        // タイムマーカーを作成
-        const marker = document.createElement('div');
-        marker.className = 'timeline-marker';
-        marker.style.top = `${topPosition}px`;
-        timelineContainer.appendChild(marker);
-        
-        // 時刻ラベルを作成
+    // 30分刻みの時間軸を作成
+    const timeAxis = generateTimeAxis(performances);
+    timeAxis.forEach(timeSlot => {
         const timeLabel = document.createElement('div');
         timeLabel.className = 'time-label';
-        timeLabel.style.top = `${topPosition - 10}px`;
-        timeLabel.textContent = performance.time;
+        timeLabel.style.top = `${timeSlot.position}px`;
+        timeLabel.textContent = timeSlot.time;
         timelineContainer.appendChild(timeLabel);
+    });
+    
+    // バンド名の重複を防ぐために位置を調整
+    const adjustedPerformances = adjustPerformancePositions(performances);
+    
+    // 各パフォーマンスをタイムライン上に配置
+    adjustedPerformances.forEach((performance, index) => {
+        const topPosition = performance.adjustedPosition || calculateTimelinePosition(performance.time, performances);
         
-        // パフォーマンス情報を作成（空き時間の場合は表示しない）
-        if (!performance.isEmpty) {
-            const performanceDiv = document.createElement('div');
-            performanceDiv.className = 'performance';
-            performanceDiv.style.top = `${topPosition - 15}px`;
-            performanceDiv.innerHTML = `
-                <div class="performance-time">${performance.time}</div>
-                <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
-            `;
-            timelineContainer.appendChild(performanceDiv);
-        }
+        // パフォーマンス情報を作成
+        const performanceDiv = document.createElement('div');
+        performanceDiv.className = 'performance';
+        performanceDiv.style.top = `${topPosition - 15}px`;
+        performanceDiv.innerHTML = `
+            <div class="performance-time">${performance.time}</div>
+            <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
+        `;
+        timelineContainer.appendChild(performanceDiv);
     });
     
     container.appendChild(timelineContainer);
+}
+
+// 30分刻みの時間軸を生成
+function generateTimeAxis(performances) {
+    const timeSlots = [];
+    const firstTime = performances[0].time.split(':').map(Number);
+    const lastTime = performances[performances.length - 1].time.split(':').map(Number);
+    
+    const startHour = firstTime[0];
+    const endHour = lastTime[0];
+    
+    for (let hour = startHour; hour <= endHour; hour++) {
+        timeSlots.push({
+            time: `${hour.toString().padStart(2, '0')}:00`,
+            position: calculateTimelinePosition(`${hour.toString().padStart(2, '0')}:00`, performances)
+        });
+        timeSlots.push({
+            time: `${hour.toString().padStart(2, '0')}:30`,
+            position: calculateTimelinePosition(`${hour.toString().padStart(2, '0')}:30`, performances)
+        });
+    }
+    
+    return timeSlots;
 }
 
 // タイムライン上の位置を計算
@@ -216,6 +218,30 @@ function calculateTimelinePosition(timeStr, performances) {
     const position = ((totalMinutes - firstTotalMinutes) / (lastTotalMinutes - firstTotalMinutes)) * timelineHeight;
     
     return Math.max(20, Math.min(timelineHeight - 20, position + 20));
+}
+
+// バンド名の重複を防ぐために位置を調整
+function adjustPerformancePositions(performances) {
+    const adjustedPerformances = [];
+    let lastPosition = 0;
+    
+    performances.forEach((performance, index) => {
+        if (!performance.isEmpty) {
+            const basePosition = calculateTimelinePosition(performance.time, performances);
+            const minGap = 50; // 最小間隔
+            
+            if (basePosition - lastPosition < minGap) {
+                performance.adjustedPosition = lastPosition + minGap;
+            } else {
+                performance.adjustedPosition = basePosition;
+            }
+            
+            lastPosition = performance.adjustedPosition;
+            adjustedPerformances.push(performance);
+        }
+    });
+    
+    return adjustedPerformances;
 }
 
 // 現在演奏中のバンドを更新
