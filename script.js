@@ -233,13 +233,13 @@ function getTimelineHeight() {
     
     if (screenWidth <= 480) {
         // 小さいスマホ: 画面の高さに合わせて調整
-        return Math.max(600, vh * 0.75);
+        return Math.max(800, vh * 0.8);
     } else if (screenWidth <= 768) {
         // タブレット・大きめスマホ
-        return Math.max(800, vh * 0.65);
+        return Math.max(1000, vh * 0.7);
     } else {
         // デスクトップ
-        return 1160;
+        return 1400;
     }
 }
 

@@ -156,7 +156,7 @@ body {
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     position: relative;
-    min-height: 800px;
+    min-height: 1000px;
 }
 
 .venue h3 {
@@ -179,7 +179,7 @@ body {
 .timeline-container {
     position: relative;
     padding: 20px 0;
-    min-height: 1200px;
+    min-height: 1400px;
     width: 100%;
     overflow: visible;
 }
@@ -389,7 +389,7 @@ body {
     
     .venue {
         padding: 15px;
-        min-height: 700px;
+        min-height: 900px;
     }
     
     .venue h3 {
@@ -399,7 +399,7 @@ body {
     }
     
     .timeline-container {
-        min-height: 800px;
+        min-height: 1000px;
         padding: 15px 0;
         width: 100%;
     }
@@ -498,7 +498,7 @@ body {
     
     .venue {
         padding: 12px;
-        min-height: 600px;
+        min-height: 800px;
     }
     
     .venue h3 {
@@ -507,7 +507,7 @@ body {
     }
     
     .timeline-container {
-        min-height: 600px;
+        min-height: 800px;
         padding: 10px 0;
         width: 100%;
     }
