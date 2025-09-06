@@ -141,6 +141,10 @@ function renderVenueTimeline(containerId, performances) {
     const timelineContainer = document.createElement('div');
     timelineContainer.className = 'timeline-container';
     
+    // 画面サイズに応じて高さを設定
+    const timelineHeight = getTimelineHeight();
+    timelineContainer.style.minHeight = `${timelineHeight + 40}px`;
+    
     // タイムラインを作成
     const timelineLine = document.createElement('div');
     timelineLine.className = 'timeline-line';
@@ -211,13 +215,33 @@ function calculateTimelinePosition(timeStr, performances) {
     const firstTotalMinutes = firstTime[0] * 60 + firstTime[1];
     const lastTotalMinutes = lastTime[0] * 60 + lastTime[1];
     
-    // タイムラインの高さ（1200px - 40px padding）
-    const timelineHeight = 1160;
+    // 画面サイズに応じてタイムラインの高さを調整
+    const timelineHeight = getTimelineHeight();
     
     // 位置を計算（最初の時刻を0、最後の時刻を最大高さとする）
     const position = ((totalMinutes - firstTotalMinutes) / (lastTotalMinutes - firstTotalMinutes)) * timelineHeight;
     
     return Math.max(20, Math.min(timelineHeight - 20, position + 20));
+}
+
+// 画面サイズに応じてタイムラインの高さを取得
+function getTimelineHeight() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    
+    // ビューポートの高さを取得（モバイルブラウザのアドレスバーを考慮）
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    
+    if (screenWidth <= 480) {
+        // 小さいスマホ: 画面の高さに合わせて調整
+        return Math.max(600, vh * 0.75);
+    } else if (screenWidth <= 768) {
+        // タブレット・大きめスマホ
+        return Math.max(800, vh * 0.65);
+    } else {
+        // デスクトップ
+        return 1160;
+    }
 }
 
 // バンド名の重複を防ぐために位置を調整
@@ -352,6 +376,20 @@ function init() {
     
     // 1分ごとに現在のバンドを更新
     setInterval(updateCurrentBands, 60000);
+    
+    // 画面サイズ変更時に再描画
+    window.addEventListener('resize', handleResize);
+}
+
+// 画面サイズ変更時の処理
+function handleResize() {
+    // デバウンス処理（連続したリサイズイベントを防ぐ）
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(() => {
+        renderTimetable('day1');
+        renderTimetable('day2');
+        updateCurrentBands();
+    }, 250);
 }
 
 // ページ読み込み時に初期化
