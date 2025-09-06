@@ -177,7 +177,7 @@ body {
 .timeline-container {
     position: relative;
     padding: 20px 0;
-    min-height: 800px;
+    min-height: 1200px;
 }
 
 .timeline-line {
@@ -193,10 +193,9 @@ body {
 .timeline-marker {
     position: absolute;
     left: 50px;
-    width: 16px;
-    height: 16px;
-    background: white;
-    border: 2px solid #667eea;
+    width: 8px;
+    height: 8px;
+    background: #667eea;
     border-radius: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -204,25 +203,8 @@ body {
 
 .timeline-marker.current {
     background: #f6ad55;
-    border-color: #ed8936;
     box-shadow: 0 0 8px rgba(246, 173, 85, 0.6);
-    transform: translateX(-50%) scale(1.2);
-}
-
-.timeline-marker::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 6px;
-    height: 6px;
-    background: #667eea;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.timeline-marker.current::after {
-    background: white;
+    transform: translateX(-50%) scale(1.5);
 }
 
 .performance {
@@ -236,6 +218,10 @@ body {
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .performance:hover {
@@ -291,6 +277,28 @@ body {
     color: white;
     margin-top: 40px;
     opacity: 0.8;
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #e1306c;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.instagram-link:hover {
+    color: #c13584;
+    transform: translateY(-1px);
+}
+
+.instagram-link svg {
+    transition: transform 0.3s ease;
+}
+
+.instagram-link:hover svg {
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -374,7 +382,7 @@ body {
     }
     
     .timeline-container {
-        min-height: 600px;
+        min-height: 900px;
         padding: 15px 0;
     }
     
@@ -477,7 +485,7 @@ body {
     }
     
     .timeline-container {
-        min-height: 500px;
+        min-height: 700px;
         padding: 10px 0;
     }
     

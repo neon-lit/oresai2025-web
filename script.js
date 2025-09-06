@@ -209,8 +209,8 @@ function calculateTimelinePosition(timeStr, performances) {
     const firstTotalMinutes = firstTime[0] * 60 + firstTime[1];
     const lastTotalMinutes = lastTime[0] * 60 + lastTime[1];
     
-    // タイムラインの高さ（800px - 40px padding）
-    const timelineHeight = 760;
+    // タイムラインの高さ（1200px - 40px padding）
+    const timelineHeight = 1160;
     
     // 位置を計算（最初の時刻を0、最後の時刻を最大高さとする）
     const position = ((totalMinutes - firstTotalMinutes) / (lastTotalMinutes - firstTotalMinutes)) * timelineHeight;
