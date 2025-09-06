@@ -166,11 +166,13 @@ function renderVenueTimeline(containerId, performances) {
     // 各パフォーマンスをタイムライン上に配置
     adjustedPerformances.forEach((performance, index) => {
         const topPosition = performance.adjustedPosition || calculateTimelinePosition(performance.time, performances);
+        const width = calculatePerformanceWidth(performance, performances, index);
         
         // パフォーマンス情報を作成
         const performanceDiv = document.createElement('div');
         performanceDiv.className = 'performance';
         performanceDiv.style.top = `${topPosition - 15}px`;
+        performanceDiv.style.width = `${width}px`;
         performanceDiv.innerHTML = `
             <div class="performance-time">${performance.time}</div>
             <a href="https://instagram.com/k_on.bu_" target="_blank" class="performance-band">${performance.band}</a>
@@ -266,6 +268,34 @@ function adjustPerformancePositions(performances) {
     });
     
     return adjustedPerformances;
+}
+
+// パフォーマンスの幅を計算（次のパフォーマンスまでの時間に基づく）
+function calculatePerformanceWidth(performance, performances, index) {
+    const currentTime = timeToMinutes(performance.time);
+    let nextTime;
+    
+    // 次のパフォーマンスを探す
+    for (let i = index + 1; i < performances.length; i++) {
+        if (!performances[i].isEmpty) {
+            nextTime = timeToMinutes(performances[i].time);
+            break;
+        }
+    }
+    
+    // 次のパフォーマンスがない場合は15分間と仮定
+    if (!nextTime) {
+        nextTime = currentTime + 15;
+    }
+    
+    // 時間差を分で計算
+    const timeDiff = nextTime - currentTime;
+    
+    // 最小15分、最大60分の範囲で調整
+    const adjustedTimeDiff = Math.max(15, Math.min(60, timeDiff));
+    
+    // 幅を計算（1分 = 2px程度）
+    return Math.max(60, adjustedTimeDiff * 2);
 }
 
 // 現在演奏中のバンドを更新

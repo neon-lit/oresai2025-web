@@ -156,6 +156,7 @@ body {
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     position: relative;
+    min-height: 800px;
 }
 
 .venue h3 {
@@ -180,6 +181,7 @@ body {
     padding: 20px 0;
     min-height: 1200px;
     width: 100%;
+    overflow: visible;
 }
 
 .timeline-line {
@@ -208,7 +210,6 @@ body {
 .performance {
     position: absolute;
     left: 100px;
-    right: 0;
     padding: 8px 12px;
     border-radius: 4px;
     background: #e3f2fd;
@@ -221,6 +222,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
+    width: 200px;
 }
 
 .venue.gymnasium .performance {
@@ -384,6 +386,7 @@ body {
     
     .venue {
         padding: 15px;
+        min-height: 700px;
     }
     
     .venue h3 {
@@ -419,6 +422,7 @@ body {
         padding: 6px 10px;
         min-height: 36px;
         margin-bottom: 6px;
+        width: 150px;
     }
     
     .performance-time {
@@ -491,6 +495,7 @@ body {
     
     .venue {
         padding: 12px;
+        min-height: 600px;
     }
     
     .venue h3 {
@@ -519,6 +524,7 @@ body {
         padding: 5px 8px;
         min-height: 32px;
         margin-bottom: 5px;
+        width: 120px;
     }
     
     .performance-time {
