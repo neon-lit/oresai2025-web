@@ -1,1 +1,73 @@
-test
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文化祭 軽音楽部 ライブタイムテーブル</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 文化祭 軽音楽部 🎵</h1>
+            <p>MUSIC LIVE TIME TABLE</p>
+        </div>
+
+        <div class="current-performance">
+            <h2>🎤 現在演奏中 🎤</h2>
+            <div class="current-bands">
+                <div class="venue-current music-room">
+                    <h3>音楽室</h3>
+                    <div class="current-band" id="current-music-room">-</div>
+                    <div class="current-time" id="current-music-room-time">-</div>
+                </div>
+                <div class="venue-current gymnasium">
+                    <h3>体育館</h3>
+                    <div class="current-band" id="current-gymnasium">-</div>
+                    <div class="current-time" id="current-gymnasium-time">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timetable-section">
+            <h2>📅 ライブタイムテーブル</h2>
+            <div class="day-selector">
+                <button class="day-button active" onclick="showDay('day1')">9月20日（土）</button>
+                <button class="day-button" onclick="showDay('day2')">9月21日（日）</button>
+            </div>
+
+            <div id="day1" class="timetable-content active">
+                <div class="venues">
+                    <div class="venue music-room">
+                        <h3>音楽室</h3>
+                        <div id="music-room-day1"></div>
+                    </div>
+                    <div class="venue gymnasium">
+                        <h3>体育館</h3>
+                        <div id="gymnasium-day1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day2" class="timetable-content">
+                <div class="venues">
+                    <div class="venue music-room">
+                        <h3>音楽室</h3>
+                        <div id="music-room-day2"></div>
+                    </div>
+                    <div class="venue gymnasium">
+                        <h3>体育館</h3>
+                        <div id="gymnasium-day2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 軽音楽部 - 文化祭ライブ</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
