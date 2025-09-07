@@ -647,28 +647,20 @@ body {
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
   }
-  /* ===== モバイル重なり対策：縦スケールUP＋可読性向上 ===== */
-.performance{ z-index: 1; }   /* ラベルより前面に */
-.time-label{ z-index: 0; }
+  /* ===== スマホで縦スケールを強化して重なり解消 ===== */
+/* 9分間隔 × 4.6px/分 = 41.4px ≥ 最小高さ40px で干渉しない計算 */
 
 @media (max-width: 768px){
-  /* これまで 3 だったpx/分を底上げ（高さ拡張） */
-  :root{ --px-per-minute: 3.6; }
-  .performance{ min-height: 44px; padding: 6px 10px; }
-  .performance-time{ font-size: .80rem; min-width: 52px; }
-  .performance-band{
-    font-size: .85rem;
-    white-space: normal;        /* 折り返し許可 */
-    overflow-wrap: anywhere;    /* 長い単語も折る */
-    line-height: 1.25;
-    text-align: left;           /* 右寄せだと詰まりやすいので左寄せ */
+    :root{ --px-per-minute: 4.8 !important; }  /* 450分 → 高さ2160px */
   }
-}
-
-@media (max-width: 480px){
-  /* さらに小さい画面では高さをもっと増やす */
-  :root{ --px-per-minute: 4; }  /* 全高 ~1800px（9:00–16:30） */
-  .performance{ min-height: 48px; }
-  .performance-time{ font-size: .78rem; min-width: 50px; }
-  .performance-band{ font-size: .83rem; }
-}
+  
+  @media (max-width: 480px){
+    :root{ --px-per-minute: 4.6 !important; }  /* 450分 → 高さ2070px */
+  }
+  
+  /* 念のため：高さは “分×px” を必ず採用（前パッチが無ければ追加） */
+  .timeline-container{
+    height: calc(var(--timetable-total-minutes) * 1px * var(--px-per-minute)) !important;
+    min-height: unset !important;
+  }
+  
