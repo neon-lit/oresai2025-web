@@ -38,7 +38,7 @@
           { start: "11:40", end: "12:00", band: "Aperon" },
           { start: "12:05", end: "12:25", band: "Celestial Penguins" },
           { start: "12:29", end: "12:38", band: "るなべる。" },
-          { start: "12:42", end: "12:51", band: "あぶりこっと" },
+          { start: "12:42", end: "12:51", band: "あぷりこっと" },
           { start: "12:55", end: "13:07", band: "消費期限" },
           { start: "13:11", end: "13:23", band: "reversible" },
           { start: "13:27", end: "13:39", band: "Φ" },
@@ -55,7 +55,7 @@
           { start: "10:42", end: "10:48", band: "GREENERYTHEATER" },
           { start: "10:52", end: "11:04", band: "BeaTEEN" },
           { start: "11:08", end: "11:15", band: ".exe" },
-          { start: "11:24", end: "11:29", band: "あぶりこっと" },
+          { start: "11:24", end: "11:29", band: "あぷりこっと" },
           { start: "11:33", end: "11:45", band: "with" },
           { start: "11:49", end: "11:58", band: "honey bunny" },
           { start: "12:02", end: "12:08", band: "Ast." },
@@ -92,17 +92,17 @@ const bandLinks = {
     "エーデルワイス": "", "peony": "",
     "社会不適ROSA": "", "ルミナージュ": "", "Chanoir": "",
     "Pneuma": "", "owl": "", "消費期限": "",
-    "REVE": "", "Toxic Tune": "", "インクブルー": "", "TheSETS": "",
-    "Emz.": "", "first.PENGUIN": "", "Φ": "",
-    "CELESTELIVE": "", "CELESTE LIVE": "",  // 表記揺れに両対応
+    "REVE": "", "Toxic Tune": "", "インクブルー": "", "TheSETS": "https://instagram.com/thesets_0617",
+    "Emz.": "", "first.PENGUIN": "", "Φ": "https://instagram.com/phi_band",
+    "CELESTELIVE": "https://instagram.com/celeste_live_", "CELESTE LIVE": "https://instagram.com/celeste_live_",  // 表記揺れに両対応
     "juicy": "", "UNIVE": "", "Vibes": "", "Alstroemeria": "",
     "umbrain": "", "世にも奇妙なバンド": "", "Aperon": "",
-    "Celestial Penguins": "", "るなべる。": "",
-    "あぶりこっと": "", "あぷりこっと": "",  // どちらでも拾えるように
-    "reversible": "",
+    "Celestial Penguins": "", "るなべる。": "https://instagram.com/lunabell_koch",
+    "あぷりこっと": "https://instagram.com/huk_apricot",  // どちらでも拾えるように
+    "reversible": "https://instagram.com/reversible_cr",
     "Chilvania": "", "MISS:TEEN": "", "lapislazuli": "",
-    "GREENERYTHEATER": "", "BeaTEEN": "", ".exe": "",
-    "with": "", "honey bunny": "", "Ast.": "", "VIVACE": "",
+    "GREENERYTHEATER": "https://instagram.com/greenery_theater23", "BeaTEEN": "", ".exe": "",
+    "with": "https://instagram.com/with_6_4er", "honey bunny": "", "Ast.": "", "VIVACE": "",
     "デリカシー咀嚼": "", "berry jam": "", "Luminous": "",
     "SOAR": "", "ALCHU": "", "Emperor": "",
     "BRASS ROCK": "", "QUAL!A": "", "RE:バロック": "",
@@ -188,14 +188,14 @@ const bandLinks = {
   
         const a = document.createElement('a');
         a.className = 'performance-band';
-        const url = bandLinks[band] || "";
-a.href = url || "#";
-if (url){
-  a.target = "_blank";
-  a.rel = "noopener noreferrer";
-} else {
-  a.removeAttribute("target"); // URL未設定のときは新規タブにしない
-}
+        const href = bandLinks[band] || "#";
+        a.href = href;
+        if (href !== "#") {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        } else {
+        a.removeAttribute("target"); // URL未設定のときは新規タブにしない
+        }
 
         a.textContent = band;
   

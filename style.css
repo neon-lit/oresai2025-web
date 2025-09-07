@@ -551,4 +551,99 @@ body {
     .footer a {
         font-size: 0.75rem;
     }
-}
+}/* =======================================================
+   ▼ 追加パッチ：統一時間軸・縦幅UP・現在時刻ライン
+   （このブロックを style.css の末尾に追記）
+   ======================================================= */
+
+/* 9:00〜16:30 = 450分。1分あたりのpxで高さを統一 */
+:root{
+    --timetable-total-minutes: 465;
+    --px-per-minute: 5;               /* PC広め：1分=5px → 全高2250px */
+    --line: #e2e8f0;
+    --current: #ff9f43;
+    --text-dark: #2d3748;
+    --text-muted: #4a5568;
+  }
+  
+  /* 端末別スケール（重なりを避けつつ縮小） */
+  @media (max-width:1024px){ :root{ --px-per-minute:4; } }   /* 全高1800px */
+  @media (max-width:768px){  :root{ --px-per-minute:3; } }   /* 全高1350px */
+  @media (max-width:480px){  :root{ --px-per-minute:2.6; } } /* 全高1170px */
+  
+  /* タイムラインの高さを“分×px”で固定（min-heightを無効化） */
+  .timeline-container{
+    height: calc(var(--timetable-total-minutes) * 1px * var(--px-per-minute)) !important;
+    min-height: unset !important;
+    position: relative;
+    overflow: visible;
+  }
+  
+  /* 縦の基準線を少し太く・前後関係を明確に */
+  .timeline-line{
+    left: 80px !important;
+    width: 2px !important;
+    background: var(--line) !important;
+    z-index: 0;
+  }
+  
+  /* 現在時刻ライン（デフォ透明→.current で発色） */
+  .timeline-marker{
+    left: 80px !important;
+    top: 0; bottom: 0;
+    width: 2px !important;
+    background: transparent !important;
+    transform: translateX(-50%);
+    z-index: 2; /* 演目より後ろにしたければ 0/1 に変更 */
+  }
+  .timeline-marker.current{ background: var(--current) !important; }
+  /* 先端のドット */
+  .timeline-marker::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,0);
+    width:10px; height:10px;
+    border-radius:50%;
+    background: var(--current);
+  }
+  
+  /* 演目枠：最低高さで可読性確保（JSがtop/heightを計算） */
+  .performance{
+    position:absolute; left:100px; right:0;
+    min-height: 40px; /* 既存値を尊重。もっと広げたいなら 48px などに */
+    display:flex; align-items:center; gap:8px;
+    padding:8px 12px;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  .performance-time{ color:var(--text-dark); font-weight:700; }
+  
+  /* ===== モバイルでの線位置＆ヒットエリア調整（既存を上書き） ===== */
+  @media (max-width:768px){
+    .timeline-line{ left:40px !important; }
+    .timeline-marker{ left:40px !important; width:2px !important; height:auto !important; }
+    .timeline-marker::after{ width:12px; height:12px; }
+    .performance{ left:56px; padding:6px 10px; }
+    .time-label{ width:40px; padding-right:6px; font-size:.72rem; }
+  }
+  @media (max-width:480px){
+    .timeline-line{ left:34px !important; }
+    .timeline-marker{ left:34px !important; width:2px !important; height:auto !important; }
+    .timeline-marker::after{ width:12px; height:12px; }
+    .performance{ left:50px; padding:5px 8px; }
+    .time-label{ width:34px; padding-right:4px; font-size:.68rem; }
+  }
+  
+  /* （任意）キーボード操作のフォーカスリング */
+  .day-button:focus-visible,
+  .performance:focus-visible,
+  .instagram-link:focus-visible{
+    outline:3px solid rgba(102,126,234,.6);
+    outline-offset:2px;
+    border-radius:8px;
+  }
+  
+  /* （任意）動きが苦手な人向け */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+  }
