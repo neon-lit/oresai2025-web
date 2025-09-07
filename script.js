@@ -86,6 +86,29 @@
         ],
       },
     };
+
+    /* 各バンド → Instagram URL（必要なものだけ埋めればOK） */
+const bandLinks = {
+    "エーデルワイス": "", "peony": "",
+    "社会不適ROSA": "", "ルミナージュ": "", "Chanoir": "",
+    "Pneuma": "", "owl": "", "消費期限": "",
+    "REVE": "", "Toxic Tune": "", "インクブルー": "", "TheSETS": "",
+    "Emz.": "", "first.PENGUIN": "", "Φ": "",
+    "CELESTELIVE": "", "CELESTE LIVE": "",  // 表記揺れに両対応
+    "juicy": "", "UNIVE": "", "Vibes": "", "Alstroemeria": "",
+    "umbrain": "", "世にも奇妙なバンド": "", "Aperon": "",
+    "Celestial Penguins": "", "るなべる。": "",
+    "あぶりこっと": "", "あぷりこっと": "",  // どちらでも拾えるように
+    "reversible": "",
+    "Chilvania": "", "MISS:TEEN": "", "lapislazuli": "",
+    "GREENERYTHEATER": "", "BeaTEEN": "", ".exe": "",
+    "with": "", "honey bunny": "", "Ast.": "", "VIVACE": "",
+    "デリカシー咀嚼": "", "berry jam": "", "Luminous": "",
+    "SOAR": "", "ALCHU": "", "Emperor": "",
+    "BRASS ROCK": "", "QUAL!A": "", "RE:バロック": "",
+    "LuNA": ""
+  };
+  
   
     /* ---------- 2) 共通ユーティリティ ---------- */
     const DAY_START_MIN = 9 * 60;        // 540 (9:00)
@@ -165,8 +188,15 @@
   
         const a = document.createElement('a');
         a.className = 'performance-band';
-        a.href = 'https://instagram.com/k_on.bu_';
-        a.target = '_blank';
+        const url = bandLinks[band] || "";
+a.href = url || "#";
+if (url){
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+} else {
+  a.removeAttribute("target"); // URL未設定のときは新規タブにしない
+}
+
         a.textContent = band;
   
         item.appendChild(t);
