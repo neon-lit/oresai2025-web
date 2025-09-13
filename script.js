@@ -10,82 +10,90 @@
     const timetableData = {
       day1: {
         musicRoom: [
-          { start: "10:14", end: "10:24", band: "エーデルワイス" },
-          { start: "10:28", end: "10:38", band: "peony" },
-          { start: "10:42", end: "10:47", band: "社会不適ROSA" },
-          { start: "10:51", end: "10:57", band: "ルミナージュ" },
-          { start: "11:01", end: "11:06", band: "Chanoir" },
-          { start: "11:10", end: "11:22", band: "Pneuma" },
-          { start: "11:26", end: "11:32", band: "owl" },
-          { start: "11:36", end: "11:43", band: "消費期限" },
-          { start: "11:47", end: "11:53", band: "REVE" },
-          { start: "11:58", end: "12:03", band: "Toxic Tune" },
-          { start: "12:07", end: "12:12", band: "インクブルー" },
-          { start: "12:16", end: "12:22", band: "TheSETS" },
-          { start: "13:53", end: "14:05", band: "Emz." },
-          { start: "14:09", end: "14:16", band: "first.PENGUIN" },
-          { start: "14:20", end: "14:25", band: "Φ" },
-          { start: "14:29", end: "14:41", band: "CELESTELIVE" },
-          { start: "14:45", end: "14:50", band: "juicy" },
-          { start: "14:54", end: "15:00", band: "UNIVE" },
-          { start: "15:04", end: "15:16", band: "Vibes" },
-          { start: "15:20", end: "15:25", band: "Alstroemeria" },
+          { start: "10:10", end: "10:24", band: "エーデルワイス" },
+          { start: "10:24", end: "10:38", band: "peony" },
+          { start: "10:38", end: "10:47", band: "社会不適ROSA" },
+          { start: "10:47", end: "10:57", band: "ルミナージュ" },
+          { start: "11:06", end: "11:22", band: "Pneuma" },
+          { start: "11:22", end: "11:32", band: "owl" },
+          { start: "11:32", end: "11:43", band: "消費期限" },
+          { start: "11:43", end: "11:53", band: "REVE" },
+          { start: "11:53", end: "12:03", band: "Toxic Tune" },
+          { start: "12:03", end: "12:12", band: "インクブルー" },
+          { start: "12:12", end: "12:22", band: "TheSETS" },
+          { start: "13:49", end: "14:05", band: "Emz." },
+          { start: "14:05", end: "14:16", band: "first.PENGUIN" },
+          { start: "14:16", end: "14:25", band: "Φ" },
+          { start: "14:25", end: "14:41", band: "CELESTELIVE" },
+          { start: "14:41", end: "14:50", band: "juicy" },
+          { start: "14:50", end: "15:00", band: "UNIVE" },
+          { start: "15:00", end: "15:16", band: "Vibes" },
+          { start: "15:16", end: "15:25", band: "Alstroemeria" },
         ],
         gymnasium: [
-          { start: "10:30", end: "10:50", band: "umbrain" },
-          { start: "10:55", end: "11:10", band: "世にも奇妙なバンド" },
-          { start: "11:15", end: "11:35", band: "juicy" },
-          { start: "11:40", end: "12:00", band: "Aperon" },
-          { start: "12:05", end: "12:25", band: "Celestial Penguins" },
-          { start: "12:29", end: "12:38", band: "るなべる。" },
-          { start: "12:42", end: "12:51", band: "あぷりこっと" },
-          { start: "12:55", end: "13:07", band: "消費期限" },
-          { start: "13:11", end: "13:23", band: "reversible" },
-          { start: "13:27", end: "13:39", band: "Φ" },
+          { start: "10:25", end: "10:50", band: "umbrain" },
+          { start: "10:50", end: "11:10", band: "世にも奇妙なバンド" },
+          { start: "11:10", end: "11:35", band: "juicy" },
+          { start: "11:35", end: "12:00", band: "Aperon" },
+          { start: "12:00", end: "12:25", band: "Celestial Penguins" },
+          { start: "12:25", end: "12:38", band: "るなべる。" },
+          { start: "12:38", end: "12:51", band: "あぷりこっと" },
+          { start: "12:51", end: "13:07", band: "消費期限" },
+          { start: "13:07", end: "13:23", band: "reversible" },
+          { start: "13:23", end: "13:39", band: "Φ" },
         ],
       },
       day2: {
         musicRoom: [
-          { start: "09:19", end: "09:24", band: "Chilvania" },
-          { start: "09:28", end: "09:40", band: "MISS:TEEN" },
-          { start: "09:44", end: "09:56", band: "るなべる。" },
-          { start: "10:00", end: "10:12", band: "reversible" },
-          { start: "10:16", end: "10:25", band: "Fortuna" },
-          { start: "10:29", end: "10:38", band: "lapislazuli" },
-          { start: "10:42", end: "10:48", band: "GREENERYTHEATER" },
-          { start: "10:52", end: "11:04", band: "BeaTEEN" },
-          { start: "11:08", end: "11:15", band: ".exe" },
-          { start: "11:24", end: "11:29", band: "あぷりこっと" },
-          { start: "11:33", end: "11:45", band: "with" },
-          { start: "11:49", end: "11:58", band: "honey bunny" },
-          { start: "12:02", end: "12:08", band: "Ast." },
-          { start: "12:12", end: "12:24", band: "VIVACE" },
-          { start: "12:28", end: "12:33", band: "Chanoir" },
-          { start: "12:37", end: "12:43", band: "デリカシー咀嚼" },
-          { start: "12:47", end: "12:54", band: "berry jam" },
-          { start: "12:58", end: "13:03", band: "Luminous" },
-          { start: "14:10", end: "14:17", band: "SOAR" },
-          { start: "14:22", end: "14:32", band: "ALCHU" },
-          { start: "14:37", end: "14:42", band: "Emperor" },
-          { start: "14:47", end: "14:53", band: "あくびまじり。" },
-          { start: "14:58", end: "15:03", band: "LuNA" },
+          { start: "09:15", end: "09:24", band: "Chilvania" },
+          { start: "09:24", end: "09:40", band: "MISS:TEEN" },
+          { start: "09:40", end: "09:56", band: "るなべる。" },
+          { start: "09:56", end: "10:12", band: "reversible" },
+          { start: "10:12", end: "10:25", band: "Fortuna" },
+          { start: "10:25", end: "10:38", band: "lapislazuli" },
+          { start: "10:38", end: "10:48", band: "GREENERYTHEATER" },
+          { start: "10:48", end: "11:04", band: "BeaTEEN" },
+          { start: "11:04", end: "11:15", band: ".exe" },
+          { start: "11:15", end: "11:29", band: "あぷりこっと" },
+          { start: "11:29", end: "11:45", band: "with" },
+          { start: "11:45", end: "11:58", band: "honey bunny" },
+          { start: "12:58", end: "12:08", band: "Ast." },
+          { start: "12:08", end: "12:24", band: "VIVACE" },
+          { start: "12:24", end: "12:33", band: "Chatnoir" },
+          { start: "12:33", end: "12:43", band: "デリカシー咀嚼" },
+          { start: "12:43", end: "12:54", band: "berry jam" },
+          { start: "12:54", end: "13:03", band: "Luminous" },
+          { start: "14:05", end: "14:17", band: "SOAR" },
+          { start: "14:17", end: "14:32", band: "ALCHU" },
+          { start: "14:32", end: "14:42", band: "Emperor" },
+          { start: "14:42", end: "14:53", band: "あくびまじり。" },
+          { start: "14:53", end: "15:03", band: "LuNA" },
         ],
         gymnasium: [
-          { start: "12:45", end: "13:05", band: "BRASS ROCK" },
-          { start: "13:11", end: "13:23", band: "with" },
-          { start: "13:27", end: "13:36", band: "TheSETS" },
-          { start: "13:40", end: "13:52", band: "GREENERYTHEATER" },
-          { start: "14:05", end: "14:30", band: "CELESTE LIVE" },
-          { start: "14:35", end: "15:00", band: "QUAL!A" },
-          { start: "15:10", end: "15:30", band: "RE:バロック" },
-          { start: "16:00", end: "16:05", band: "reversible" },
-          { start: "16:09", end: "16:14", band: "with" },
-          { start: "16:18", end: "16:23", band: "GREENERYTHEATER" },
+          { start: "12:40", end: "13:05", band: "BRASS ROCK" },
+          { start: "13:07", end: "13:23", band: "with" },
+          { start: "13:23", end: "13:36", band: "TheSETS" },
+          { start: "13:36", end: "13:52", band: "GREENERYTHEATER" },
+          { start: "14:00", end: "14:30", band: "CELESTE LIVE" },
+          { start: "14:30", end: "15:00", band: "QUAL!A" },
+          { start: "15:00", end: "15:30", band: "RE:バロック" },
+          { start: "15:55", end: "16:05", band: "reversible" },
+          { start: "16:05", end: "16:14", band: "with" },
+          { start: "16:14", end: "16:23", band: "GREENERYTHEATER" },
           // 共通スケールで 16:30 にクリップ
-          { start: "16:27", end: "16:30", band: "CELESTELIVE" },
+          { start: "16:23", end: "16:30", band: "CELESTELIVE" },
         ],
       },
     };
+
+    const getDefaultDayId = () => {
+        const now = new Date();        // 端末のローカル時刻で判定
+        const m = now.getMonth();      // 0=Jan, 8=Sep
+        const d = now.getDate();       // 日にち
+        if (m === 8 && d === 21) return 'day2';
+        if (m === 8 && d === 20) return 'day1';
+        return 'day1';
+      };
 
     /* 各バンド → Instagram URL（必要なものだけ埋めればOK） */
 const bandLinks = {
@@ -106,7 +114,7 @@ const bandLinks = {
     "デリカシー咀嚼": "", "berry jam": "", "Luminous": "",
     "SOAR": "", "ALCHU": "", "Emperor": "",
     "BRASS ROCK": "", "QUAL!A": "", "RE:バロック": "",
-    "LuNA": ""
+    "LuNA": "","あくびまじり。":"https://www.instagram.com/akubi_majiri"
   };
   
   
@@ -336,6 +344,7 @@ const bandLinks = {
     /* ---------- 8) 起動 & 定期更新 ---------- */
     document.addEventListener('DOMContentLoaded', () => {
       renderAll();
+      showDay(getDefaultDayId());
       // 30秒ごとに「現在演奏中」とマーカーを更新
       setInterval(() => { updateCurrentBands(); updateAllMarkers(); }, 30000);
     });
