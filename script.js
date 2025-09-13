@@ -99,7 +99,7 @@
 const bandLinks = {
     "エーデルワイス": "", "peony": "",
     "社会不適ROSA": "", "ルミナージュ": "", "Chanoir": "",
-    "Pneuma": "", "owl": "", "消費期限": "",
+    "Pneuma": "https://www.instagram.com/pneuma_huk", "owl": "", "消費期限": "",
     "REVE": "", "Toxic Tune": "", "インクブルー": "", "TheSETS": "https://instagram.com/thesets_0617",
     "Emz.": "", "first.PENGUIN": "", "Φ": "https://instagram.com/phi_band",
     "CELESTELIVE": "https://instagram.com/celeste_live_", "CELESTE LIVE": "https://instagram.com/celeste_live_",  // 表記揺れに両対応
