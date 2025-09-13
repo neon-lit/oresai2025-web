@@ -680,7 +680,7 @@ body {
   background: #ffcc80 !important;
 }
 :root{
-    --adj-gap: 8px; /* 境界太さ。6〜10pxくらいでお好み調整 */
+    --adj-gap: 6px; /* 境界太さ。6〜10pxくらいでお好み調整 */
   }
   
   /* 背景のにじみ防止 */
