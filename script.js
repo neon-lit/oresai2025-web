@@ -57,7 +57,7 @@
           { start: "11:15", end: "11:29", band: "あぷりこっと" },
           { start: "11:29", end: "11:45", band: "with" },
           { start: "11:45", end: "11:58", band: "honey bunny" },
-          { start: "12:58", end: "12:08", band: "Ast." },
+          { start: "11:58", end: "12:08", band: "Ast." },
           { start: "12:08", end: "12:24", band: "VIVACE" },
           { start: "12:24", end: "12:33", band: "Chatnoir" },
           { start: "12:33", end: "12:43", band: "デリカシー咀嚼" },
@@ -114,7 +114,7 @@ const bandLinks = {
     "デリカシー咀嚼": "", "berry jam": "", "Luminous": "",
     "SOAR": "", "ALCHU": "", "Emperor": "",
     "BRASS ROCK": "", "QUAL!A": "", "RE:バロック": "",
-    "LuNA": "","あくびまじり。":"https://www.instagram.com/akubi_majiri"
+    "LuNA": "https://www.instagram.com/lvnas_5","あくびまじり。":"https://www.instagram.com/akubi_majiri"
   };
   
   
@@ -175,6 +175,8 @@ const bandLinks = {
       mount.innerHTML = '';
       const tl = createTimelineContainer();
       mount.appendChild(tl);
+
+      let prevEndMin = null; // ★追加：直前演目の終了（分）
   
       performances.forEach(({ start, end, band }) => {
         const s = timeToMinutes(start);
@@ -189,6 +191,11 @@ const bandLinks = {
         item.dataset.band = band;
         item.style.top = `${top}px`;
         item.style.height = `${height}px`;
+
+        if (prevEndMin !== null && s === prevEndMin) {
+            item.classList.add('adjacent');
+          }
+          prevEndMin = e; // 次回判定のために更新
   
         const t = document.createElement('div');
         t.className = 'performance-time';
