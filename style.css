@@ -663,4 +663,31 @@ body {
     height: calc(var(--timetable-total-minutes) * 1px * var(--px-per-minute)) !important;
     min-height: unset !important;
   }
+  .timeline-marker::after{
+    content: none !important;
+  }
+
+  /* 現在演奏中の強制ハイライト（会場問わず全面色変更） */
+.venue.music-room .performance.current,
+.venue.gymnasium .performance.current{
+  background: #ffcc80 !important;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3) !important;
+}
+
+/* ホバーしてもハイライト色を維持 */
+.venue.music-room .performance.current:hover,
+.venue.gymnasium .performance.current:hover{
+  background: #ffcc80 !important;
+}
+:root{
+    --adj-gap: 6px; /* 境界太さ。6〜10pxくらいでお好み調整 */
+  }
+  
+  /* 背景のにじみ防止 */
+  .performance{ background-clip: padding-box; }
+  
+  /* 連続している演目だけ上側に白の境界を描く（見た目の均一スキマ） */
+  .performance.adjacent{
+    border-top: var(--adj-gap) solid #fff;
+  }
   
