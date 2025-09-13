@@ -132,7 +132,7 @@ const bandLinks = {
     "BeaTEEN": "", ".exe": "",
     "with": "https://instagram.com/with_6_4er",
     "honey bunny": "",
-    "Ast.": "",
+    "Ast.": "https://www.instagram.com/ast._huk25",
     "VIVACE": "",
     "デリカシー咀嚼": "",
     "berry jam": "",
