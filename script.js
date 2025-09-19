@@ -115,7 +115,7 @@ const bandLinks = {
     "CELESTE LIVE": "https://instagram.com/celeste_live_",  // 表記揺れに両対応
     "juicy": "https://www.instagram.com/juicy_014_",
     "UNIVE": "https://www.instagram.com/univ_.e",
-    "Vibes": "",
+    "Vibes": "https://www.instagram.com/v__.vibes",
     "Alstroemeria": "",
     "umbrain": "",
     "世にも奇妙なバンド": "",
