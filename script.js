@@ -113,7 +113,7 @@ const bandLinks = {
     "Φ": "https://instagram.com/phi_band",
     "CELESTELIVE": "https://instagram.com/celeste_live_",
     "CELESTE LIVE": "https://instagram.com/celeste_live_",  // 表記揺れに両対応
-    "juicy": "",
+    "juicy": "https://www.instagram.com/juicy_014_",
     "UNIVE": "https://www.instagram.com/univ_.e",
     "Vibes": "",
     "Alstroemeria": "",
